@@ -1,0 +1,21 @@
+{
+  "name": "backend-express",
+  "version": "1.0.0",
+  "description": "This is fullstack web development project using react for frontend and express for backend, typescript will be used later.",
+  "keywords": [
+    "express",
+    "react",
+    "typescript",
+    "tailwindcss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "Full-Stack"
+  },
+  "author": "Vineet Kumar Singh",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon src/index.js"
+  }
+}
