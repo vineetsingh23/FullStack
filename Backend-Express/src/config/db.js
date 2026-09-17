@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import env from "./env.js";
+// import env from "./env.js";
 
-const db ="mongodb+srv://fullstack-app:vineet123@webdeveloper.uagsjrp.mongodb.net/?appName=WebDeveloper";
+const db ="mongodb://fullstack-app:vineet123@webdeveloper.uagsjrp.mongodb.net/?appName=WebDeveloper";
 mongoose.set("strictQuery", true, "useNewUrlParser", true);
 
 const connectDB = async () => {
   try {
-    const connection = await mongoose.connect(db);
+    await mongoose.connect(db);
     console.log(`MongoDB Atlas Connected successfully!!`);
   } catch (error) {
     console.error(`Error: ${error.message}`);
