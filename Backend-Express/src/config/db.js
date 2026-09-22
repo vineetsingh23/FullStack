@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-// import env from "./env.js";
+import env from "./env.js";
 
-const db ="mongodb://fullstack-app:vineet123@webdeveloper.uagsjrp.mongodb.net/?appName=WebDeveloper";
+const db = env.mongoUri;
 mongoose.set("strictQuery", true, "useNewUrlParser", true);
 
 const connectDB = async () => {
