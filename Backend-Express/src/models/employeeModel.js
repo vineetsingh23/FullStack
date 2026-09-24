@@ -61,6 +61,10 @@ const employeeSchema = new mongoose.Schema(
       ref: 'PayScale',
       required: true,
     },
+    currentBasicPay :{
+      type:Number,
+      required:true,
+    },
     cadreGroup: {
       type: String,
       enum: ['Group A', 'Group B', 'Group C', 'Group D'],
@@ -88,7 +92,26 @@ const employeeSchema = new mongoose.Schema(
       default: null,
     },
   },
-  { timestamps: true }
+  { timestamps: true,
+    toJSON: {virtuals:true},
+    toObject: {virtuals:true},
+   }
 );
+
+// Virtual Field: Dynamically calculates salary based on populated PayScale allowances
+employeeSchema.virtual('totalMonthlySalary').get(function () {
+  // Check if payScale has been populated
+  if (!this.payScale || typeof this.payScale !== 'object') {
+    return null;
+  }
+
+  const basic = this.currentBasicPay || 0;
+  const da = (basic * (this.payScale.allowances?.daPercentage || 0)) / 100;
+  const hra = (basic * (this.payScale.allowances?.hraPercentage || 0)) / 100;
+  const ta = this.payScale.allowances?.taAmount || 0;
+  const gradePay = this.payScale.gradePay || 0;
+
+  return basic + da + hra + ta + gradePay;
+});
 
 export default mongoose.model('Employee', employeeSchema);

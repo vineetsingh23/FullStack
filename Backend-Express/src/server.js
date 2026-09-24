@@ -2,16 +2,19 @@
 // dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 import express from "express";
+import cors from 'cors';
 import env from "./config/env.js";
 import connectDB from "./config/db.js";
 import employeeRoutes from './routes/employeeRoutes.js'
 import departmentRoutes from './routes/departmentRoutes.js'
+
 
 const app = express();
 
 connectDB();
 
 app.use(express.json());
+app.use(cors({origin:'http://localhost:5173'}))
 
 
 // Empployee routes
