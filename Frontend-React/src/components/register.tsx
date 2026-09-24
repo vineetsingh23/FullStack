@@ -13,13 +13,16 @@ export const PaginatedEmployeeForm: React.FC = () => {
 
   // Dropdown list states
   const [departments, setDepartments] = useState<IDepartmentOption[]>([]);
+  const [error,setError] = useState<string | null>(null);
+  // const [loading,setLoading] = useState(false);
+
   const [payScales, setPayScales] = useState<IPayScaleOption[]>([]);
   const [loadingDropdowns, setLoadingDropdowns] = useState<boolean>(true);
 
   const {
     register,
     handleSubmit,
-    
+   
     trigger,
     getValues,
     formState: { errors, isSubmitting },
@@ -40,34 +43,54 @@ export const PaginatedEmployeeForm: React.FC = () => {
   });
 
   // Fetch dropdown collections on mount
-  useEffect(() => {
-    const fetchOptions = async () => {
+  // useEffect(() => {
+  //   const fetchOptions = async () => {
+  //     try {
+  //       setLoadingDropdowns(true);
+  //       const [deptRes, payRes] = await Promise.all([
+  //         fetch('http://localhost:8080/api/departments'),
+  //         fetch('http://localhost:8080/api/payscales'),
+  //       ]);
+
+  //       const deptData = await deptRes.json();
+  //       const payData = await payRes.json();
+
+  //       if (deptData.success) {
+  //         setDepartments(deptData.data || []);
+  //         console.log(deptData)
+  //       }
+  //       if (payData.success) {
+  //         setPayScales(payData.data || []);
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to load department or pay scale options:', error);
+  //     } finally {
+  //       setLoadingDropdowns(false);
+  //     }
+  //   };
+
+  //   fetchOptions();
+  // }, []);
+
+    useEffect (()=>{
+    const fetchDepartments = async () =>{
       try {
-        setLoadingDropdowns(true);
-        const [deptRes, payRes] = await Promise.all([
-          fetch('http://localhost:8080/api/departments'),
-          fetch('http://localhost:8080/api/payscales'),
-        ]);
-
-        const deptData = await deptRes.json();
-        const payData = await payRes.json();
-
-        if (deptData.success) {
-          setDepartments(deptData.data || []);
-          console.log(deptData)
+        const response = await fetch('http://localhost:8080/api/departments')
+        if (!response.ok){
+          throw new Error(`HTTP ERROR STATUS: ${response.status}`)
         }
-        if (payData.success) {
-          setPayScales(payData.data || []);
-        }
-      } catch (error) {
-        console.error('Failed to load department or pay scale options:', error);
+        const result = await response.json();
+        setDepartments(result.data || [])
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load departments')
       } finally {
-        setLoadingDropdowns(false);
+        setLoadingDropdowns(false)
       }
-    };
 
-    fetchOptions();
-  }, []);
+    
+    }
+    fetchDepartments();
+  },[])
 
   // Validate active step fields before moving forward
   const handleNext = async (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -131,7 +154,7 @@ export const PaginatedEmployeeForm: React.FC = () => {
         <div className="flex w-2/3 flex-col h-[85vh] max-w-xl  my-auto bg-white shadow-xl rounded-xl border border-gray-200 overflow-hidden">
       
       {/* HEADER & STEP INDICATOR */}
-      <div className="p-5 w-full bg-slate-50 border-b border-gray-200 shrink-0 w-1/2">
+      <div className="p-5  bg-slate-50 border-b border-gray-200 shrink-0 w-1/2">
         <h2 className="text-xl font-bold text-slate-800">
           Government Employee Registration
         </h2>
