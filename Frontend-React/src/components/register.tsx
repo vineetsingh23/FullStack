@@ -19,6 +19,7 @@ export const PaginatedEmployeeForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    
     trigger,
     getValues,
     formState: { errors, isSubmitting },
@@ -42,9 +43,10 @@ export const PaginatedEmployeeForm: React.FC = () => {
   useEffect(() => {
     const fetchOptions = async () => {
       try {
+        setLoadingDropdowns(true);
         const [deptRes, payRes] = await Promise.all([
-          fetch('/api/departments'),
-          fetch('/api/payscales'),
+          fetch('http://localhost:8080/api/departments'),
+          fetch('http://localhost:8080/api/payscales'),
         ]);
 
         const deptData = await deptRes.json();
@@ -52,6 +54,7 @@ export const PaginatedEmployeeForm: React.FC = () => {
 
         if (deptData.success) {
           setDepartments(deptData.data || []);
+          console.log(deptData)
         }
         if (payData.success) {
           setPayScales(payData.data || []);
@@ -67,7 +70,8 @@ export const PaginatedEmployeeForm: React.FC = () => {
   }, []);
 
   // Validate active step fields before moving forward
-  const handleNext = async () => {
+  const handleNext = async (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     let fieldsToValidate: (keyof IEmployeeFormInput)[] = [];
 
     if (currentStep === 1) {
@@ -115,17 +119,19 @@ export const PaginatedEmployeeForm: React.FC = () => {
       alert('Network error. Failed to connect to server.');
     }
   };
+  
 
   return (
     // Outer Container: Locks maximum screen height so outer page won't scroll
-    <div>
-      <div>
-        left
-      </div>
-        <div className="flex flex-col h-[85vh] max-w-4xl mx-auto my-auto bg-white shadow-xl rounded-xl border border-gray-200 overflow-hidden">
+    <div className='flex'>
+     <div className='w-1/2 text-center content-center h-[85vh] bg-blue-800 text-gray-200 text-3xl '>
+      Registration Form
+      <hr className='mt-5 '/>
+     </div>
+        <div className="flex w-2/3 flex-col h-[85vh] max-w-xl  my-auto bg-white shadow-xl rounded-xl border border-gray-200 overflow-hidden">
       
       {/* HEADER & STEP INDICATOR */}
-      <div className="p-5 bg-slate-50 border-b border-gray-200 shrink-0 w-1/2">
+      <div className="p-5 w-full bg-slate-50 border-b border-gray-200 shrink-0 w-1/2">
         <h2 className="text-xl font-bold text-slate-800">
           Government Employee Registration
         </h2>

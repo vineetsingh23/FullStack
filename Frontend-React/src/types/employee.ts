@@ -32,7 +32,7 @@ export interface IEmployeeFormInput {
   gender: 'Male' | 'Female' | 'Transgender' | 'Other';
 
   // Step 3: Service & Placement Details
-  department: string; // Will store selected dropdown ObjectId
+  department:string; // Will store selected dropdown ObjectId
   designation: string;
   payScale: string;   // Will store selected dropdown ObjectId
   currentBasicPay: number;
