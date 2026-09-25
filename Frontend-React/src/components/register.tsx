@@ -7,8 +7,7 @@ import type {
 } from '../types/employee';
 
 const TOTAL_STEPS = 4;
-
-export const PaginatedEmployeeForm: React.FC = () => {
+const PaginatedEmployeeForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   // Dropdown list states
@@ -491,4 +490,4 @@ export const PaginatedEmployeeForm: React.FC = () => {
   );
 };
 
-export default PaginatedEmployeeForm;
+// export default PaginatedEmployeeForm;

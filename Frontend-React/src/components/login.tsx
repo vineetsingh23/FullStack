@@ -33,7 +33,7 @@ export default function login() {
 
       <select name="departments" id="department">
 
-        <option value="department">--select dep--
+        <option value="department">--select department--
              {loading && <p>Loading departments...</p>}
 
         </option>
@@ -47,6 +47,8 @@ export default function login() {
 
       </select>
       {error && <p>{error}</p>}
+
+      {/* <button className='btn-primary'>Submit</button> */}
 
    
 

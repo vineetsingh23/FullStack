@@ -10,6 +10,7 @@ export default function Navbar() {
         <NavLink to={'/services'}>Our Services</NavLink>
         <NavLink to={'/register'}>Register Here</NavLink>
         <NavLink to={'/login'}>Login</NavLink>
+        <NavLink to={'/registration'}>Registration</NavLink>
     </div>
   )
 }

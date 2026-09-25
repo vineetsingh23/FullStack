@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import About from './components/about';
 import Contact from './components/contact';
 import Services from './components/services';
-import Register from './components/register';
+import Register from './components/Registration';
 import Login from './components/login';
 
 export default function App() {
@@ -16,8 +16,9 @@ export default function App() {
       <Route path='about' element={<About/>} />
       <Route path='contact' element={<Contact/>} />
       <Route path='services' element={<Services/>} />
-      <Route path='register' element={<Register/>} />
+      {/* <Route path='register' element={<Register/>} /> */}
       <Route path='login' element={<Login/>} />
+      <Route path='registration' element={<Register/>}/>
     </Routes>
     <Outlet/>
     
