@@ -17,7 +17,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node --check src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "seed":"node src/seeds/seed.js"
   
   },
   "dependencies": {
