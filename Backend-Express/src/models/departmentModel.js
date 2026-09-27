@@ -23,6 +23,11 @@ const departmentSchema = new mongoose.Schema(
       ref: 'Employee',
       default: null,
     },
+    parentDepartment : {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Department',
+      default:null,
+    }
   },
   { timestamps: true }
 );

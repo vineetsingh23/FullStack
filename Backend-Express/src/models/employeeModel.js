@@ -48,7 +48,8 @@ const employeeSchema = new mongoose.Schema(
       required: true,
     },
     designation: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Designation',
       required: true, // e.g., "Under Secretary", "Section Officer", "Assistant Engineer"
     },
     employmentType: {

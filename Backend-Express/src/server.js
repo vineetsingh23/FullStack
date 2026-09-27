@@ -7,6 +7,8 @@ import env from "./config/env.js";
 import connectDB from "./config/db.js";
 import employeeRoutes from './routes/employeeRoutes.js'
 import departmentRoutes from './routes/departmentRoutes.js'
+import payScaleRoutes from './routes/payScaleRoutes.js';
+import designationRoutes from './routes/desigRoutes.js';
 
 
 const app = express();
@@ -22,7 +24,11 @@ app.use(cors({origin:'http://localhost:5173'}))
 
 app.use("/api/employees",employeeRoutes);
 
-app.use("/api/departments",departmentRoutes)
+app.use("/api/departments",departmentRoutes);
+
+app.use("/api/payscales",payScaleRoutes);
+
+app.use("/api/designations",designationRoutes);
 
 
 

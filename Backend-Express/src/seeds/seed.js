@@ -7,23 +7,26 @@ import PayScale from '../models/payScaleModel.js';
 dotenv.config();
 
 const initialDepartments = [
-  { name: 'Human Resources', code: 'HR' },
-  { name: 'Engineering', code: 'ENG' },
-  { name: 'Finance & Accounts', code: 'FIN' },
-  { name: 'Administration', code: 'ADM' }
+  { departmentName: 'Human Resources', departmentCode: 'HR',ministry: 'Ministry of Urban Development' },
+  { departmentName: 'Engineering', departmentCode: 'ENG',ministry: 'Ministry of Urban Development' },
+  { departmentName: 'Finance & Accounts', departmentCode: 'FIN',ministry: 'Ministry of Urban Development' },
+  { departmentName: 'Administration', departmentCode: 'ADM',ministry: 'Ministry of Urban Development'}
 ];
 
 const initialDesignations = [
-  { title: 'Director', hierarchyLevel: 1 },
-  { title: 'Department Head', hierarchyLevel: 2 },
-  { title: 'Senior Executive', hierarchyLevel: 3 },
-  { title: 'Junior Assistant', hierarchyLevel: 4 }
+  { title: 'Managing Director', hierarchyLevel: 10 },
+  { title: 'Board of Director', hierarchyLevel: 10 },
+  { title: 'General Manager', hierarchyLevel: 9 },
+  { title: 'Assistant Manager', hierarchyLevel: 9 },
+  { title: 'Senior Supervisor', hierarchyLevel: 8 },
+  { title: 'Supervisor', hierarchyLevel: 7 },
+  { title: 'Technician', hierarchyLevel: 6 },
 ];
 
 const initialPayScales = [
-  { level: 'Level 10', minSalary: 56100, maxSalary: 177500 },
-  { level: 'Level 8', minSalary: 47600, maxSalary: 151100 },
-  { level: 'Level 6', minSalary: 35400, maxSalary: 112400 }
+  { payLevel: 'Level 10', basicPayMin: 56100, basicPayMax: 177500 },
+  { payLevel: 'Level 8', basicPayMin: 47600, basicPayMax: 151100 },
+  { payLevel: 'Level 6', basicPayMin: 35400, basicPayMax: 112400 },
 ];
 
 const seedDatabase = async () => {
