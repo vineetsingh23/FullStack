@@ -11,6 +11,7 @@ export default function Navbar() {
         <NavLink to={'/register'}>Register Here</NavLink>
         <NavLink to={'/login'}>Login</NavLink>
         <NavLink to={'/registration'}>Registration</NavLink>
+        <NavLink to={'/profile'}>User Profile</NavLink>
     </div>
   )
 }

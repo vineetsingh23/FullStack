@@ -1,6 +1,46 @@
 
+import {GENDER_OPTIONS,EMPLOYMENT_STATUS,EMPLOYMENT_TYPE,CADRE} from '../constants/constants'
+import {useEffect, useState} from 'react'
+import type {IDepartmentOption} from '../types/employee.ts'
+
 
 export default function Registration() {
+  const [departments, setDepartments] = useState<IDepartmentOption[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false)
+
+  
+
+
+ useEffect(()=>{
+    const fetchDepartments = async () => {
+      try{
+        const response = await fetch('http://localhost:8080/api/departments')
+        if(!response.ok){
+          throw new Error(`HTTP ERROR STATUS : ${response.status}`)
+
+        }
+        const result = await response.json();
+        setDepartments(result.data || [])
+     
+      }
+       catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load departments')
+      } finally {
+        setLoading(true)
+      }
+    }
+    fetchDepartments()
+ },[])
+
+ if(error){
+  console.log(`Error occured during fetching data : ${error}`)
+ }
+
+ if(loading){
+  <div>Data is loading....</div>
+ }
+
   return (
     <div className='flex justify-center flex-col  items-center'>
       
@@ -28,9 +68,11 @@ export default function Registration() {
                 <label htmlFor="select" >Gender</label>
                 <select className="border border-gray-400 rounded px-2 py-1.5">
                   <option value="gender">--Select Gender--</option>
-                  <option value="gender">Male</option>
-                  <option value="gender">Female</option>
-                  <option value="gender">Other</option>
+                  {GENDER_OPTIONS.map((gender)=>(
+
+                  <option key={gender}>{gender}</option>
+                  ))}
+               
                 </select>
                
               </div>
@@ -62,10 +104,11 @@ export default function Registration() {
                 <label htmlFor="department" >Department</label>
                     <select name="department" id="department" className="border border-gray-400 rounded px-2 py-1.5">
                       <option value="department">Select Department</option>
-                      <option value="department">Operation</option>
-                      <option value="department">Maintenance</option>
-                      <option value="department">Project</option>
-                      <option value="department">Civil</option>
+                      {departments.map((dept)=>(
+
+                      <option key={dept._id}>{dept.departmentName}</option>
+                      ))}
+                      
                     </select>
                 </div>
 
@@ -78,10 +121,11 @@ export default function Registration() {
                 <label htmlFor="employmentType" >Employment Type</label>
                     <select name="employmentType" id="department" className="border border-gray-400 rounded px-2 py-1.5">
                       <option value="employmentType">Select Employment Type</option>
-                      <option value="employmentType">Permanent</option>
-                      <option value="employmentType">Contractual</option>
-                      <option value="employmentType">Deputation</option>
-                      <option value="employmentType">Probationary</option>
+                      {EMPLOYMENT_TYPE.map((emp)=>(
+
+                      <option key={emp}>{emp}</option>
+                      ))}
+                   
                     </select>
                 </div>
               
@@ -99,10 +143,10 @@ export default function Registration() {
                 <label htmlFor="cadre" >Cadre</label>
                     <select name="cadre" id="cadre" className="border border-gray-400 rounded px-2 py-1.5">
                       <option value="cadre">Select Cadre</option>
-                      <option value="cadre">Non supervisor</option>
-                      <option value="cadre">Supervisor</option>
-                      <option value="cadre">senior supervisor</option>
-                      <option value="cadre">assistant manager</option>
+                      {CADRE.map((cadre)=>(
+                        <option key={cadre}>{cadre}</option>
+                      ))}
+               
                     </select>
                 </div>
 
@@ -125,10 +169,11 @@ export default function Registration() {
                 <label htmlFor="status" >Employment Status</label>
                     <select name="status" id="department" className="border border-gray-400 rounded px-2 py-1.5">
                       <option value="status">Select Employment Status</option>
-                      <option value="status">Active</option>
-                      <option value="status">Transferred</option>
-                      <option value="status">Suspended</option>
-                      <option value="status">Retired</option>
+                      {EMPLOYMENT_STATUS.map((emp_status)=>(
+
+                      <option key={emp_status}>{emp_status}</option>
+                      ))}
+                      
                     </select>
                 </div>
 
