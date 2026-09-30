@@ -11,7 +11,7 @@ const employeeSchema = new mongoose.Schema(
       uppercase: true, // e.g., "GOV-2026-8942"
     },
     aadhaarNumber: {
-      type: String,
+      type: Number,
       required: [true, 'Aadhaar / National ID is required'],
       unique: true,
       select: false, // Hidden by default for privacy
@@ -33,7 +33,7 @@ const employeeSchema = new mongoose.Schema(
       lowercase: true, 
       trim: true 
     },
-    phone: { type: String, required: true },
+    phone: { type: Number, required: true },
     dateOfBirth: { type: Date, required: true },
     gender: { 
       type: String, 
@@ -48,13 +48,13 @@ const employeeSchema = new mongoose.Schema(
       required: true,
     },
     designation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref:'Designation',
-      required: true, // e.g., "Under Secretary", "Section Officer", "Assistant Engineer"
+      type: String,
+      required: true,
+      // required: true, // e.g., "Under Secretary", "Section Officer", "Assistant Engineer"
     },
     employmentType: {
       type: String,
-      enum: ['Permanent', 'Contractual', 'Deputation', 'Probationary'],
+      enum: ['Permanent', 'Contractual', 'Deputation', 'Probationary', 'Direct Recruitment', 'Regular'],
       default: 'Probationary',
     },
     payScale: {
@@ -68,18 +68,14 @@ const employeeSchema = new mongoose.Schema(
     },
     cadreGroup: {
       type: String,
-      enum: ['Group A', 'Group B', 'Group C', 'Group D'],
+      enum: ['Executive', 'Non-Executive'],
       required: true,
     },
     
     // Official Status & Posting
     dateOfJoining: { type: Date, required: true },
     retirementDate: { type: Date, required: true },
-    currentPostingLocation: {
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      officeAddress: { type: String, required: true },
-    },
+
     status: {
       type: String,
       enum: ['Active', 'Transferred', 'Suspended', 'Retired', 'On Leave'],
@@ -88,8 +84,7 @@ const employeeSchema = new mongoose.Schema(
 
     // Reporting Hierarchy
     reportingOfficer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Employee',
+      type: String,
       default: null,
     },
   },

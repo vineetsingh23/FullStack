@@ -11,8 +11,15 @@ export const createEmployee = async (req, res) => {
     res.status(201).json({ success: true, data: employee });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
+    console.error('database errorL: ',error)
   }
+  if (!req.body.department || !req.body.payScale) {
+    return res.status(400).json({ success: false, message: 'Department and PayScale are required' });
+  }
+  
 };
+
+
 
 // Get all employees with populated Department and PayScale references
 export const getEmployees = async (req, res) => {

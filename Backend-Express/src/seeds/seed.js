@@ -27,6 +27,7 @@ const initialPayScales = [
   { payLevel: 'Level 10', basicPayMin: 56100, basicPayMax: 177500 },
   { payLevel: 'Level 8', basicPayMin: 47600, basicPayMax: 151100 },
   { payLevel: 'Level 6', basicPayMin: 35400, basicPayMax: 112400 },
+  
 ];
 
 const seedDatabase = async () => {

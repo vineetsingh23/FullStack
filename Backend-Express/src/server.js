@@ -34,6 +34,8 @@ app.use("/api/designations",designationRoutes);
 
 
 
+
+
 app.listen(env.port, () => {
   console.log(`application is running on port: ${env.port}`);
 });
