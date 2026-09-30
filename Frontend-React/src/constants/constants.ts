@@ -4,4 +4,4 @@ export const EMPLOYMENT_STATUS:string[] = ["Active", "Retired", "Transferred", "
 
 export const EMPLOYMENT_TYPE:string[] = ["Direct Recruitment", "Permanent", "Probationary", "Regular", "Contractual"]
 
-export const CADRE:string[] = ["Executive", "Non - Executive"]
+export const CADRE:string[] = ["Executive", "Non-Executive"]

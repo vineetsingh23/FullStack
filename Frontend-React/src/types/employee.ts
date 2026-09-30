@@ -1,8 +1,3 @@
-export interface IPostingLocation {
-  city: string;
-  state: string;
-  officeAddress: string;
-}
 
 // Option interfaces for populating dropdowns
 export interface IDepartmentOption {
@@ -20,15 +15,15 @@ export interface IPayScaleOption {
 export interface IEmployeeFormInput {
   // Step 1: Official Identification
   employeeId: string;
-  aadhaarNumber: string;
+  aadhaarNumber: number;
   panNumber?: string;
 
   // Step 2: Personal Details
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
-  dateOfBirth: string;
+  phone: number;
+  dateOfBirth: Date;
   gender: 'Male' | 'Female' | 'Transgender' | 'Other';
 
   // Step 3: Service & Placement Details
@@ -36,11 +31,11 @@ export interface IEmployeeFormInput {
   designation: string;
   payScale: string;   // Will store selected dropdown ObjectId
   currentBasicPay: number;
-  cadreGroup: 'Group A' | 'Group B' | 'Group C' | 'Group D';
-  employmentType: 'Probationary' | 'Permanent' | 'Contractual' | 'Deputation';
-  dateOfJoining: string;
-  retirementDate: string;
+  cadreGroup: 'Executive' | 'Non-Executive';
+  employmentType: 'Direct Recruitment' | 'Permanent' | 'Probationary' | 'Regular' | 'Contractual';
+  dateOfJoining: Date;
+  retirementDate: Date;
+  status:string;
+  reportingOfficer: string;
 
-  // Step 4: Posting Location
-  currentPostingLocation: IPostingLocation;
 }
