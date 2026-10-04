@@ -46,30 +46,29 @@ export const getEmployeeById = asyncHandler(async (req,res)=>{
     res.status(200).json(new ApiResponse(200, employee, 'Employee details retrieved'));
 });
 
+export const updateEmployee = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  const employee = await Employee.findByIdAndUpdate(id, updatedData, { new: true })
+    .populate('department')
+    .populate('payScale');
 
-// // Get single employee with calculated monthly salary
-// export const getEmployeeById = asyncHandler(async (req, res) => {
-//   const employee = await Employee.findById(req.params.id)
-//     .populate('department', 'departmentName ministry')
-//     .populate('payScale'); // Mongoose populates scale allowances here
+  if (!employee) {
+    res.status(404);
+    throw new Error('Employee not found');
+  }
 
-//   if (!employee) {
-//     res.status(404);
-//     throw new Error('Employee not found');
-//   }
+  res.status(200).json(new ApiResponse(200, employee, 'Employee updated'));
+});
 
-//   // employee.totalMonthlySalary is automatically included in JSON output
-//   res.status(200).json(new ApiResponse(200, employee, 'Employee details retrieved'));
-// });
+export const deleteEmployee = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const employee = await Employee.findByIdAndDelete(id);
+  if (!employee) {
+    res.status(404);
+    throw new Error('Employee not found');
+  }
+  res.status(200).json(new ApiResponse(200, null, 'Employee deleted'));
+});
 
 
-// export const getEmployeeById = async (req, res) => {
-//   try {
-//     const employees = await Employee.findById(req.)
-//       .populate('department', 'departmentName ministry')
-//       .populate('payScale', 'payLevel basicPayMin basicPayMax');
-//     res.status(200).json({ success: true, data: employees });
-//   } catch (error) {
-//     res.status(500).json({ success: false, message: error.message });
-//   }
-// };

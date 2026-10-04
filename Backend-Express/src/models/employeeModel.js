@@ -8,13 +8,14 @@ const employeeSchema = new mongoose.Schema(
       required: [true, 'Government Employee ID is required'],
       unique: true,
       trim: true,
-      uppercase: true, // e.g., "GOV-2026-8942"
+      uppercase: true,   // e.g., "GOV-2026-8942"
     },
     aadhaarNumber: {
       type: Number,
       required: [true, 'Aadhaar / National ID is required'],
       unique: true,
-      select: false, // Hidden by default for privacy
+      select: false, 
+      length: 12, // Hidden by default for privacy
     },
     panNumber: {
       type: String,
@@ -24,17 +25,18 @@ const employeeSchema = new mongoose.Schema(
     },
 
     // Personal Details
-    firstName: { type: String, required: true, trim: true },
-    lastName: { type: String, required: true, trim: true },
+    firstName: { type: String, required: true, trim: true, capitalize: true },
+    lastName: { type: String, required: true, trim: true ,capitalize: true},
     email: { 
       type: String, 
       required: true, 
       unique: true, 
       lowercase: true, 
-      trim: true 
+      trim: true,
+      match: [/\S+@\S+\.\S+/, 'Please use a valid email address'] 
     },
-    phone: { type: Number, required: true },
-    dateOfBirth: { type: Date, required: true },
+    phone: { type: Number, required: true, length: 10 },
+    dateOfBirth: { type: Date, required: true, format: 'DD-MM-YYYY' },
     gender: { 
       type: String, 
       enum: ['Male', 'Female', 'Transgender', 'Other'], 
@@ -46,10 +48,12 @@ const employeeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Department',
       required: true,
+      capitalize: true,
     },
     designation: {
       type: String,
       required: true,
+      capitalize: true,
       // required: true, // e.g., "Under Secretary", "Section Officer", "Assistant Engineer"
     },
     employmentType: {
@@ -73,8 +77,8 @@ const employeeSchema = new mongoose.Schema(
     },
     
     // Official Status & Posting
-    dateOfJoining: { type: Date, required: true },
-    retirementDate: { type: Date, required: true },
+    dateOfJoining: { type: Date, required: true, format: 'DD-MM-YYYY' },
+    retirementDate: { type: Date, required: true, format: 'DD-MM-YYYY' },
 
     status: {
       type: String,
@@ -86,6 +90,7 @@ const employeeSchema = new mongoose.Schema(
     reportingOfficer: {
       type: String,
       default: null,
+      capitalize: true,
     },
   },
   { timestamps: true,
