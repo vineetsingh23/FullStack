@@ -102,7 +102,7 @@ export default function Registration() {
               <input
                 {...register('employeeId', { required: true })}
                 className="border border-gray-400 rounded px-2 py-1.5"
-                placeholder="GOV-2026-8942"
+                placeholder="12649"
               />
             </div>
 
@@ -111,7 +111,7 @@ export default function Registration() {
               <label>First Name</label>
               <input
                 {...register('firstName', { required: true })}
-                className="border border-gray-400 rounded px-2 py-1.5"
+                className="border border-gray-400 rounded px-2 py-1.5 capitalize"
               />
             </div>
 

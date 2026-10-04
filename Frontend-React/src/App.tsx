@@ -7,6 +7,7 @@ import Services from './components/services';
 import Register from './components/Registration';
 import Login from './components/login';
 import Profile from './components/userProfile'
+import EmployeeData from './components/employeeData';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
       <Route path='login' element={<Login/>} />
       <Route path='registration' element={<Register/>}/>
       <Route path='profile' element={<Profile/>}/>
+      <Route  path='employee-data' element={<EmployeeData/>}/>
     </Routes>
     <Outlet/>
     
