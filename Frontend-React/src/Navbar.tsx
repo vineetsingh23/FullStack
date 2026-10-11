@@ -15,8 +15,9 @@ export default function Navbar() {
         <NavLink to={'/services'}  className={getNavClass}>Our Services</NavLink>
         <NavLink to={'/employee-data'}  className={getNavClass}>Employees Data</NavLink>
         <NavLink to={'/login'}  className={getNavClass}>Login</NavLink>
-        <NavLink to={'/registration'}  className={getNavClass}>Registration</NavLink>
+        {/* <NavLink to={'/registration'}  className={getNavClass}>Registration</NavLink> */}
         <NavLink to={'/profile'}  className={getNavClass}>User Profile</NavLink>
+        <NavLink to={'/station-earning'}  className={getNavClass}>Station Earning</NavLink>
     </div>
   )
 }

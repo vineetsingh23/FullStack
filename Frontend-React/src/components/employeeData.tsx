@@ -1,13 +1,21 @@
 
 import { useEffect, useState } from 'react';
-import {Menubar} from '@base-ui/react'
+import { Menubar} from '@base-ui/react'
 import type { IEmployeeRecord } from '../types/employee';
 import { tableHeaders } from '../types/employee';
+import { useNavigate } from 'react-router';
+
 
 export default function EmployeeData() {
   const [employees, setEmployees] = useState<IEmployeeRecord[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate()
+
+  function clickHandler() {
+    navigate('/registration')
+  }
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -40,13 +48,20 @@ export default function EmployeeData() {
         Employee Data Table
       </h1>
       <Menubar
-        items={[
-          { label: 'Add Employee', onClick: () => console.log('Add Employee clicked') },
-        ]}
+        // items={[
+        //   { label: 'Add Employee', onClick: () => console.log('Add Employee clicked') },
+        // ]}
       />  
+      <div className='flex justify-between items-center px-5'>
+          <input type="search" aria-label="Search employees" className="my-4 rounded-md border-2 px-4 py-2" />
+      <div>
+       <button className='bg-gray-100 px-5 py-3 rounded-sm space-x-5 border border-gray-400 drop-shadow-xl content-center' onClick={()=>clickHandler()}>
+        <span className='text-3xl px-3 items-center'>+</span> Add Employee</button>
+      </div>
+      </div>
 
+      
 
-      <input type="search" aria-label="Search employees" className="my-4 rounded-md border-2 px-4 py-2" />
 
       <div className="my-4 overflow-x-auto">
         {loading ? (
